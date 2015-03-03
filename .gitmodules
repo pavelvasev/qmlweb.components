@@ -1,0 +1,3 @@
+[submodule "qmlweb"]
+	path = qmlweb
+	url = https://github.com/pavelvasev/qmlweb
