@@ -25,7 +25,19 @@ Item {
 
         CheckBox {
             text: "Click me.."
-            width: 100
+            width: 200
+            onCheckedChanged: text = "thank you! checked="+checked;
+        }
+        
+        Row {
+          spacing:5
+          Slider {
+            id: sla
+            value: 0.3
+          }
+          Text {
+            text: "value ="+sla.value
+          }
         }
 
     }
