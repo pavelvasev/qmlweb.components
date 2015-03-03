@@ -8,6 +8,7 @@ Item {
     Column {
         x:5
         y:5
+        width: 200
         spacing:5
 
         Button {
@@ -20,6 +21,11 @@ Item {
             id: btn2
             text: "some text 2"
             onClicked: btn2.text = "12345!"
+        }
+
+        CheckBox {
+            text: "Click me.."
+            width: 100
         }
 
     }

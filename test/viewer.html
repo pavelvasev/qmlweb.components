@@ -78,6 +78,7 @@ window.onhashchange = function() {
         }
 
         eng = new QMLEngine(canvasEl, engOpts);
+        eng.addImportPath("../QtQuick/Controls"); // for now we have to point to import dir directly 
         eng.loadFile(curFile);
         eng.start();
 
