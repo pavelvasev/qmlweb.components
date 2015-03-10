@@ -11,6 +11,12 @@ Item {
         width: 200
         spacing:5
 
+        FileSelect {
+          id: fs
+          onFileChanged: console.log("selected file=",file);
+        }
+        
+
         Button {
             id: btn
             text: "some text"
