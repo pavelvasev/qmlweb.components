@@ -9,17 +9,15 @@ Item {
 
   property var model: ['value1','value2','value3', 'value4']
 
-  // internal
-  property var htmlNode
-  property int currentIndex: 0
-  property string currentText: model[currentIndex]
-  property int count: model.length
+  property int    currentIndex: 0
+  property string currentText:  model[currentIndex]
+  property int    count:        model.length
 
   Component.onCompleted: {
     init();
   }
 
-  function handleFileSelect(e){
+  function handleSelectItem(e){
     var index = parseInt(e.target?e.target.value:currentIndex);
     currentIndex = index;
     currentText = e.target[index].innerText;
@@ -27,10 +25,10 @@ Item {
 
   function init() {
     self.dom.style.pointerEvents = "auto";
+
     count = model.length;
     currentIndex = (currentIndex >= count)?0:currentIndex;
     currentText = model[currentIndex];
-
 
     var str = '';
     for(var i = 0; i < count; i++) {
@@ -41,7 +39,7 @@ Item {
     var item = self.dom.firstChild;
     item.style.width = width + 'px';
 
-    item.addEventListener('change', handleFileSelect, false);
+    item.addEventListener('change', handleSelectItem, false);
   }
 
   onCurrentIndexChanged: {
