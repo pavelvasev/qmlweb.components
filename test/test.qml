@@ -13,9 +13,33 @@ Item {
 
         FileSelect {
           id: fs
-          onFileChanged: console.log("selected file=",file);
+          onFileChanged: console.log("selected file=",file.name);
+        }
+
+        Row {
+          spacing:5
+          ComboBox {
+            id: select
+            model: ['bla','bla2','bla3', 'bla4', 'bla5', 'bla6', 'bla7']
+            currentIndex: 0
+            }
+
+          Text {
+            text: "selected ="+select.currentIndex + ' ' + select.currentText
+          }
         }
         
+        Button {
+            id: btn3
+            text: "newModel"
+            onClicked: select.model = ['olo','olo2','olo3', 'olo5']
+        }
+
+        Button {
+            id: btn4
+            text: "change currentIndex"
+            onClicked: select.currentIndex = 3
+        }
 
         Button {
             id: btn
@@ -36,7 +60,7 @@ Item {
         }
         
         Row {
-          spacing:5
+          spacing:10
           Slider {
             id: sla
             value: 0.3
