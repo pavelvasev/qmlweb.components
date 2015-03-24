@@ -11,7 +11,7 @@ Item {
 
   property int    currentIndex: 0
   property string currentText:  model[currentIndex]
-  property int    count:        model.length
+  property int    count: 0
 
   Component.onCompleted: {
     init();
@@ -23,8 +23,9 @@ Item {
 
   function init() {
     var count = model.length;
+
     self.dom.style.pointerEvents = "auto";
-    currentIndex = (currentIndex >= model.length)?0:currentIndex;
+    currentIndex = (currentIndex >= count)?0:currentIndex;
 
     var str = '';
     for(var i = 0; i < count; i++) {

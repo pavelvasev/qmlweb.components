@@ -25,7 +25,7 @@ Item {
             }
 
           Text {
-            text: "selected ="+select.currentIndex + ' ' + select.currentText
+            text: "currentIndex="+select.currentIndex + ' currentText=' + select.currentText
           }
         }
         
