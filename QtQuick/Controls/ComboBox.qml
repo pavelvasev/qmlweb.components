@@ -18,17 +18,13 @@ Item {
   }
 
   function handleSelectItem(e){
-    var index = parseInt(e.target?e.target.value:currentIndex);
-    currentIndex = index;
-    currentText = e.target[index].innerText;
+    currentIndex = parseInt(e.target?e.target.value:currentIndex);
   }
 
   function init() {
+    var count = model.length;
     self.dom.style.pointerEvents = "auto";
-
-    count = model.length;
-    currentIndex = (currentIndex >= count)?0:currentIndex;
-    currentText = model[currentIndex];
+    currentIndex = (currentIndex >= model.length)?0:currentIndex;
 
     var str = '';
     for(var i = 0; i < count; i++) {
@@ -45,8 +41,9 @@ Item {
   onCurrentIndexChanged: {
     var item = self.dom.firstChild;
     if (currentIndex <= count) {
-        currentText = model[currentIndex]
         item.children[currentIndex].selected = true;
+      } else {
+        currentIndex = 0
       }
   }
 
