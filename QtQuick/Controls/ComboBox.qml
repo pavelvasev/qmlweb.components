@@ -11,7 +11,7 @@ Item {
 
   property int    currentIndex: 0
   property string currentText:  model[currentIndex]
-  property int    count:        model.length
+  property int    count: 0
 
   Component.onCompleted: {
     init();
@@ -20,15 +20,13 @@ Item {
   function handleSelectItem(e){
     var index = parseInt(e.target?e.target.value:currentIndex);
     currentIndex = index;
-    currentText = e.target[index].innerText;
   }
 
   function init() {
     self.dom.style.pointerEvents = "auto";
 
     count = model.length;
-    currentIndex = (currentIndex >= count)?0:currentIndex;
-    currentText = model[currentIndex];
+    currentIndex = (currentIndex >= count) ? 0 : currentIndex;
 
     var str = '';
     for(var i = 0; i < count; i++) {
@@ -45,7 +43,7 @@ Item {
   onCurrentIndexChanged: {
     var item = self.dom.firstChild;
     if (currentIndex <= count) {
-        currentText = model[currentIndex]
+        //currentText = model[currentIndex]
         item.children[currentIndex].selected = true;
       }
   }
