@@ -3,7 +3,7 @@ import QtQuick.Controls 1.2
 
 Item {
     width: 500
-    height: 500
+    height: 600
 
     Column {
         x:5
@@ -15,7 +15,6 @@ Item {
             title: "GroupBox test"
             width: parent.width
             id: gbox
-
             Column {
                 spacing:3
 
@@ -41,7 +40,43 @@ Item {
                 onFileChanged: console.log("selected file=",file.name);
             }
         }
+        GroupBox {
+            title: "ProgressBar test"
 
+            Column {
+                spacing: 5
+                Row {
+                    ProgressBar {
+                        id: progress
+                        maximumValue: 2
+                        indeterminate: true
+                        value: 1.6
+                    }
+
+                    Text {
+                        text: "value="+progress.value +
+                              ", indeterminate=" + progress.indeterminate +
+                              ", percent=" + 100*progress.value/progress.maximumValue + "%"
+                    }
+                }
+                Row {
+                    spacing: 5
+                    Button {
+                        id: btn5
+                        width: 160
+                        text: "set 0.9 and determinate"
+                        onClicked: progress.value = 0.9, progress.indeterminate = false
+                    }
+
+                    Button {
+                        id: btn7
+                        width: 160
+                        text: "maximumValue"
+                        onClicked: progress.maximumValue = 1
+                    }
+                }
+            }
+        }
 
         GroupBox {
             title: "ComboBox test"
@@ -53,7 +88,7 @@ Item {
                     spacing:5
                     ComboBox {
                         id: select
-                        model: ['bla','bla2','bla3', 'bla4', 'bla5', 'bla6', 'bla7']
+                        model: ['item1','item2','item3', 'item4', 'item5', 'item6', 'item7']
                         currentIndex: 0
                     }
 
@@ -65,7 +100,7 @@ Item {
                 Button {
                     id: btn3
                     text: "newModel"
-                    onClicked: select.model = ['olo','olo2','olo3', 'olo5']
+                    onClicked: select.model = ['option1', 'option2', 'option3', 'option4']
                 }
 
                 Button {

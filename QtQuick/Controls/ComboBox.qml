@@ -10,7 +10,7 @@ Item {
 
   id: self
 
-  property var model: ['value1','value2','value3', 'value4']
+  property var model: ['option1', 'option2', 'option3', 'option4']
 
   property int    currentIndex: 0
   property string currentText:  model[currentIndex]
