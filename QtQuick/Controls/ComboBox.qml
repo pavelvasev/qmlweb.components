@@ -3,7 +3,10 @@ import QtQuick.Controls 1.2
 
 Item {
   height: 30
-  width: 200
+  // compute with based on content
+  // but we have to used not currentText, but some average or max options text len
+  //width: currentText ? currentText.length * 20 : 100
+  width: 80
 
   id: self
 

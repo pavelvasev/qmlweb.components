@@ -1,5 +1,5 @@
 Embed {
-  height: 30
+  height: 21
   width: 200
 
   html: "<input type='file' />"
