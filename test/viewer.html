@@ -82,13 +82,12 @@ window.onhashchange = function() {
         eng.loadFile(curFile);
         eng.start();
 
-        mainView.style.top = (window.innerHeight - mainView.offsetHeight)/2 + "px";
+        mainView.style.top = Math.max( 0, (window.innerHeight - mainView.offsetHeight)/2) + "px";
         mainView.style.left = (window.innerWidth - mainView.offsetWidth)/2 + "px";
-
+        
         var filename = curFile.split("/");
         filename = filename[filename.length - 1];
         document.title = filename + " - QML Viewer"
-
     } else {
         window.location.href = "#test.qml";
     }
