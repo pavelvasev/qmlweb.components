@@ -1,6 +1,7 @@
 import QtQuick 2.3
 import QtQuick.Controls 1.2
 
+// http://doc.qt.io/qt-5/qml-qtquick-controls-slider.html
 Item {
   width: 110
   height: 30
@@ -42,5 +43,7 @@ Item {
       if (updateValueWhileDragging)
         r.oninput = changeHandler;
   } // onCompleted
+
+  onValueChanged: htmlNode.value = slider.value;
  
 }
