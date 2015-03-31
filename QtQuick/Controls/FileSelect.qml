@@ -2,10 +2,12 @@ Embed {
   height: 21
   width: 200
 
-  html: "<input type='file' />"
+  html: "<input type='file' " + (multiple ? "multiple" : "") + "/>"
   id: me
 
   property var file
+  property var files
+  property var multiple: false
 
   // signal data();
 
@@ -15,8 +17,9 @@ Embed {
 
   // http://www.html5rocks.com/en/tutorials/file/dndfiles/
   function handleFileSelect(evt) {
-    var files = evt.target.files; // FileList object
-    file = files[0];
+    var htmlFiles = evt.target.files; // FileList object
+    file = htmlFiles[0];
+    files = htmlFiles;
     
     // ридеры в другом месте должны быть.. 
     // var reader = new FileReader();

@@ -44,7 +44,7 @@ Item {
 
   onCurrentIndexChanged: {
     var item = self.dom.firstChild;
-    if (currentIndex <= count) {
+    if (item && currentIndex <= count) {
         item.children[currentIndex].selected = true;
       } else {
         currentIndex = 0

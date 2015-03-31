@@ -11,6 +11,22 @@ Item {
         width: parent.width
         spacing: 5
 
+        GroupBox { 
+          title: "RadioButton test"
+
+          Row {
+            RadioButton {
+              text: "First choice"
+            }
+            RadioButton {
+              text: "The long Second choice"
+            }
+            RadioButton {
+              text: "Third choice"
+            }            
+          }
+        }
+
         GroupBox {
             title: "GroupBox test"
             width: parent.width
