@@ -45,8 +45,9 @@ Item {
 
   onCurrentIndexChanged: {
     var item = self.dom.firstChild;
-    if (currentIndex <= count) {
+    if (item && currentIndex <= count) {
         //currentText = model[currentIndex]
+        //debugger;
         item.children[currentIndex].selected = true;
       }
   }

@@ -12,11 +12,21 @@ Item {
   property real maximumValue :1
   property real minimumValue :0
   property real stepSize :0.1
-
+  
   property var updateValueWhileDragging : true
   
   // internal
   property var htmlNode
+
+  onMaximumValueChanged: {
+    if (htmlNode)
+      htmlNode.max = maximumValue;
+  }
+
+  onMinimumValueChanged: {
+    if (htmlNode)
+      htmlNode.min = minimumValue;
+  }  
 
   Component.onCompleted: {
       if (!value) value = minimumValue;

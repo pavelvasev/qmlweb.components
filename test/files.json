@@ -4,6 +4,10 @@
     "title": "* First test"
 },
 {
+    "file": "tabviews.qml",
+    "title": "* TabView test"
+},
+{
     "file": "groupboxes.qml",
     "title": "* GroupBox test"
 },

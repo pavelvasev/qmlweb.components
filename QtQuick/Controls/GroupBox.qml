@@ -10,8 +10,10 @@ Item {
 
     default property alias newChildren: content.data
 
-    width: childrenRect ? 30 + childrenRect[0] : 200
-    height: childrenRect? 30 + childrenRect[1] : 50
+    width: childrenRect ? 14+radius*2 + childrenRect[0] : 200
+    height: childrenRect? 14+radius*2 + childrenRect[1] : 50
+    
+    property var radius: 4
 
     function computeChildrenRect()
     {
@@ -46,15 +48,15 @@ Item {
 
     Item {
         id: fieldsetItem
-        width: parent.width - 35
-        height: parent.height - 20
+        width: parent.width - 19 - radius*2
+        height: parent.height - 16 - 3*radius/4
 
         property var htmlTagName: "fieldset"
         
         Component.onCompleted: {
             legend = document.createElement("legend");
             fieldsetItem.dom.appendChild( legend );
-            fieldsetItem.dom.style.cssText += "-webkit-border-radius: 8px;-moz-border-radius: 8px; border-radius: 8px;";// padding: 0px;";
+            fieldsetItem.dom.style.cssText += "-webkit-border-radius: "+radius+"px;-moz-border-radius: "+radius+"px; border-radius: "+radius+"px;";// padding: 0px;";
 
             groupbox.titleChanged();
 
@@ -65,7 +67,7 @@ Item {
 
     Item {
         x: (groupbox.width - fieldsetItem.width)/2 -5
-        y: 10 + (groupbox.height - fieldsetItem.height)/2
+        y: 8 + (groupbox.height - fieldsetItem.height)/2
         width: fieldsetItem.width
         height: fieldsetItem.height
 
