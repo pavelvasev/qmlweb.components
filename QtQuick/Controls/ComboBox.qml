@@ -14,7 +14,7 @@ Item {
 
   property int    currentIndex: 0
   property string currentText:  model[currentIndex]
-  property int    count: 0
+  property int    count: model.length
 
   Component.onCompleted: {
     init();
