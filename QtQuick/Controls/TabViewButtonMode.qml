@@ -1,6 +1,5 @@
 
 // http://doc.qt.io/qt-5/qml-qtquick-controls-tabview.html
-// uses RadioButton for tabs view
 
 Item {
   id: tabview
@@ -22,9 +21,9 @@ Item {
     Repeater {
       parent: tabview 
       model: content.children.length
-      delegate: RadioButton {
+      delegate: Button {
         // text: modelData.title
-        text: content.children[ item.index ].title || content.children[ item.index ].text || ("Tab "+item.index)
+        // text: content.children[ item.index ].title
         id: item
         Component.onCompleted: console.log("Added an element (index: " + item.index + ")");
         onClicked: tabview.currentIndex = item.index
@@ -35,7 +34,7 @@ Item {
 
   Item {
         x: 2
-        y: 20
+        y: 22
         width: tabview.width
         height: tabview.height - buttons.height - 2
 
@@ -62,11 +61,11 @@ Item {
   onCurrentIndexChanged: {
     for (var i=0; i<content.children.length; i++) {
       content.children[i].visible = false;
-      // buttons.children[i].text = content.children[i].title || content.children[i].text || ("Tab "+i);
+      buttons.children[i].text = content.children[i].title || content.children[i].text || ("Tab "+i);
     }
     if (content.children.length > 0) {
       content.children[currentIndex].visible = true;
-      buttons.children[currentIndex].checked = true; //// text = "<strong>" + buttons.children[currentIndex].text + "</strong";
+      buttons.children[currentIndex].text = "<strong>" + buttons.children[currentIndex].text + "</strong";
     }
   }
 
