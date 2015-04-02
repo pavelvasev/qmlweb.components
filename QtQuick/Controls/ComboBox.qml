@@ -10,26 +10,25 @@ Item {
 
   id: self
 
-  property var model: ['value1','value2','value3', 'value4']
+  property var model: ['option1', 'option2', 'option3', 'option4']
 
   property int    currentIndex: 0
   property string currentText:  model[currentIndex]
-  property int    count: 0
+  property int    count: model.length
 
   Component.onCompleted: {
     init();
   }
 
   function handleSelectItem(e){
-    var index = parseInt(e.target?e.target.value:currentIndex);
-    currentIndex = index;
+    currentIndex = parseInt(e.target?e.target.value:currentIndex);
   }
 
   function init() {
-    self.dom.style.pointerEvents = "auto";
+    var count = model.length;
 
-    count = model.length;
-    currentIndex = (currentIndex >= count) ? 0 : currentIndex;
+    self.dom.style.pointerEvents = "auto";
+    currentIndex = (currentIndex >= count)?0:currentIndex;
 
     var str = '';
     for(var i = 0; i < count; i++) {
@@ -46,9 +45,9 @@ Item {
   onCurrentIndexChanged: {
     var item = self.dom.firstChild;
     if (item && currentIndex <= count) {
-        //currentText = model[currentIndex]
-        //debugger;
         item.children[currentIndex].selected = true;
+      } else {
+        currentIndex = 0
       }
   }
 
