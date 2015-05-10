@@ -25,7 +25,7 @@ Item {
         // text: modelData.title
         // text: content.children[ item.index ].title
         id: item
-        Component.onCompleted: console.log("Added an element (index: " + item.index + ")");
+        // Component.onCompleted: console.log("Added an element (index: " + item.index + ")");
         onClicked: tabview.currentIndex = item.index
       }
     }
