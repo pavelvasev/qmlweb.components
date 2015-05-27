@@ -1,8 +1,9 @@
 Embed {
   height: 21
   width: 200
+  property var transparent: false
 
-  html: "<input type='file' " + (multiple ? "multiple" : "") + "/>"
+  html: "<input type='file' " + (multiple ? "multiple" : "") + " style='width:" + width + "px;" + (transparent ? "color: transparent;":"") + "'/>" 
   id: me
 
   property var file
@@ -13,7 +14,10 @@ Embed {
   onFileChanged: {
     var d =  this.dom.children [0];
     if (d && d.files && d.files[0] !== file) {
-      jQuery( this.dom.children [0] ).val(file);
+      if (file.name)
+        jQuery( this.dom.children [0] ).val(file);
+      else
+        jQuery( this.dom.children [0] ).val("");
       /*
       d.files[0] = file;
       */
