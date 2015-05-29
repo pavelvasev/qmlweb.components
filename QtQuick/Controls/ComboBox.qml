@@ -14,7 +14,7 @@ Item {
 
   property int    currentIndex: 0
   property string currentText:  model[currentIndex]
-  property int    count: 0
+  property int    count: 0 //model.length
 
   Component.onCompleted: {
     init();
@@ -29,10 +29,11 @@ Item {
     self.dom.style.pointerEvents = "auto";
 
     count = model.length;
-    currentIndex = (currentIndex >= count) ? 0 : currentIndex;
+    currentIndex = (currentIndex >= count) ? count-1 : currentIndex;
 
     var str = '';
-    for(var i = 0; i < count; i++) {
+    var k = count;
+    for(var i = 0; i < k; i++) {
       str += '<option value="'+i+'" '+(i==currentIndex?'selected':'')+'> '+model[i]+'</option>';
     }
     self.dom.innerHTML = '<select>'+str+'</select>';
@@ -45,10 +46,12 @@ Item {
 
   onCurrentIndexChanged: {
     var item = self.dom.firstChild;
+    //debugger;
     if (item && currentIndex <= count) {
         //currentText = model[currentIndex]
         //debugger;
-        item.children[currentIndex].selected = true;
+        if (item.children[currentIndex])
+          item.children[currentIndex].selected = true;
       }
   }
 
