@@ -29,7 +29,7 @@ Item {
   }  
 
   Component.onCompleted: {
-      if (!value) value = minimumValue;
+      if (typeof(value)==="undefined") value = minimumValue;
       
       slider.dom.style.pointerEvents = "auto";
       
