@@ -41,10 +41,10 @@ Item {
   onSourceComponentChanged: {
     
     if (item) {
-//        console.log("deleting item...");
+        console.log("deleting item...");
         loader.item.$delete();
         //item.parent = undefined;
-        delete loader.item;
+        //delete loader.item; if we call delete, it will destroy property, including getters/setters, and not the object.
         loader.item = undefined;
     }
 
@@ -71,6 +71,7 @@ Item {
     // applyProperties(meta.object, it, it, meta.context);
     // видимо сюда пойдут properties
 
+            console.log("assigning parent to loaded item",loader);
             it.parent = loader;
             loader.childrenChanged();
             
@@ -81,8 +82,9 @@ Item {
                 engine.$initializePropertyBindings();
                 callOnCompleted(it);
             }
+  //debugger;
+    console.log("setting item to loader",loader.source, "it=",it );
     //debugger;
-//    console.log("setting item to loader",loader.source );
     loader.item = it;
    
     // see http://doc.qt.io/qt-5/qml-qtquick-loader.html Loader sizing behavior

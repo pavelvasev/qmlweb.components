@@ -7,12 +7,17 @@ Item {
   property bool   when: true
 
   onValueChanged: transfer_value()
-  onTargetChanged: transfer_value()
+  onTargetChanged: {
+//    console.log(">>>>>>>> target changed to",target ? target.id : "NULL");
+    transfer_value()
+  }
   onPropertyChanged: transfer_value()
 
   function transfer_value() {
     if (!when) return;
     if (!target || !property) return;
+//    console.log("transfering ",value,"to",property,"target=",target);
+//    debugger;
     target[property] = value;
   }
 }

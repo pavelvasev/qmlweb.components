@@ -16,6 +16,12 @@ Item {
   property var updateValueWhileDragging : true
   
   // internal
+
+  onUpdateValueWhileDraggingChanged: {
+    if (!htmlNode) return;
+    htmlNode.oninput = updateValueWhileDragging ? htmlNode.onchange  : null;
+  }     
+  
   property var htmlNode
 
   onMaximumValueChanged: {
@@ -50,8 +56,9 @@ Item {
 
       r.onchange = changeHandler;
 
-      if (updateValueWhileDragging)
-        r.oninput = changeHandler;
+      updateValueWhileDraggingChanged();
+//      if (updateValueWhileDragging)
+//        r.oninput = changeHandler;
   } // onCompleted
 
   onValueChanged: htmlNode.value = slider.value;
