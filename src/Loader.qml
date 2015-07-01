@@ -20,7 +20,9 @@ Item {
   onSourceChanged: {
     if (source) {
       if (active) {
-        sourceComponent = Qt.createComponent( source, __executionContext )
+        // __executionContext
+        var context = this.$properties["source"].componentScope;
+        sourceComponent = Qt.createComponent( source,context )
       }
     }
     else
@@ -41,7 +43,7 @@ Item {
   onSourceComponentChanged: {
     
     if (item) {
-        console.log("deleting item...");
+        //console.log("deleting item...");
         loader.item.$delete();
         //item.parent = undefined;
         //delete loader.item; if we call delete, it will destroy property, including getters/setters, and not the object.
@@ -59,7 +61,8 @@ Item {
     }
 
     // Alter objects context to the outer context
-    it.$context = __executionContext;
+    // no need - it uses component context which is ok
+    // it.$context = __executionContext;
     
     //if (meta.object.id)
     //    meta.context[meta.object.id] = item;
@@ -71,7 +74,7 @@ Item {
     // applyProperties(meta.object, it, it, meta.context);
     // видимо сюда пойдут properties
 
-            console.log("assigning parent to loaded item",loader);
+           // console.log("assigning parent to loaded item",loader);
             it.parent = loader;
             loader.childrenChanged();
             
@@ -82,8 +85,8 @@ Item {
                 engine.$initializePropertyBindings();
                 callOnCompleted(it);
             }
-  //debugger;
-    console.log("setting item to loader",loader.source, "it=",it );
+  
+    //console.log("setting item to loader",loader.source, "it=",it );
     //debugger;
     loader.item = it;
    
@@ -92,7 +95,7 @@ Item {
     //  If an explicit size is not specified for the Loader, the Loader is automatically resized to the size of the loaded item once the component is loaded.
     //  If the size of the Loader is specified explicitly by setting the width, height or by anchoring, the loaded item will be resized to the size of the Loader.    
     
-    console.log("loader loader.$isUsingImplicitWidth=",loader.$isUsingImplicitWidth, "loader.$isUsingImplicitHeight=",loader.$isUsingImplicitHeight,"width=",width,source );
+    //console.log("loader loader.$isUsingImplicitWidth=",loader.$isUsingImplicitWidth, "loader.$isUsingImplicitHeight=",loader.$isUsingImplicitHeight,"width=",width,source );
     if (!loader.$isUsingImplicitWidth)
     {
       //console.log("setting loader.item.width = loader.width",loader.width);    

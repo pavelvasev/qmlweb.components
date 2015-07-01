@@ -7,4 +7,9 @@ Rectangle {
   Text {
     text: "B. This rect has size=50x50. But may be streched by loader."
   }
+
+  Text {
+    y: 30
+    text: "the value of var r15="+(typeof(r15) === "undefined" ? "undefined" : r15)
+  }  
 }

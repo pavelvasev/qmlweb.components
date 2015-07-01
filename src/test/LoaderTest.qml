@@ -1,5 +1,7 @@
 Column {
     id: col
+    property var r15: 15
+    function foo() { return 16; }
 
     Row {
         height: 30
