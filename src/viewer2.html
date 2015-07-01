@@ -4,6 +4,8 @@
 <script src="../../qmlweb/src/process.js"></script>
 <script src="../../qmlweb/src/import.js"></script>
 <script src="../../qmlweb/src/qtcore.js"></script>
+<script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+
 <style>
 html, body { margin: 0; padding: 0; height: 100% }
 button { margin: 0; padding: 1px; padding-top: 0; padding-bottom: 0 }
@@ -78,7 +80,7 @@ window.onhashchange = function() {
         }
 
         eng = new QMLEngine(canvasEl, engOpts);
-        eng.addImportPath("../QtQuick/Controls/"); // for now we have to point to import dir directly 
+        if (eng.addImportPath) eng.addImportPath(""); // for now we have to point to import dir directly 
         eng.loadFile(curFile);
         eng.start();
 
@@ -89,7 +91,7 @@ window.onhashchange = function() {
         filename = filename[filename.length - 1];
         document.title = filename + " - QML Viewer"
     } else {
-        window.location.href = "#test.qml";
+        window.location.href = "#test/main.qml";
     }
 }
 window.onhashchange();
@@ -112,12 +114,12 @@ backendSel.onchange = function() {
     window.onhashchange(); // Reload file
 }
 
-var list = JSON.parse(getUrlContents("files.json")),
+var list = JSON.parse(getUrlContents("test/files.json")),
     hash = window.location.hash.substr(1);
     
 for (var i = 0; i < list.length; i++) {
     var optEl = document.createElement("option");
-    optEl.value = list[i].file;
+    optEl.value = "test/"+list[i].file;
     optEl.textContent = list[i].title + " (" + list[i].file + ")";
     optEl.selected = (hash == list[i].file);
     selEl.appendChild(optEl);

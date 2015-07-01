@@ -1,5 +1,5 @@
-import QtQuick 2.3
-import QtQuick.Controls 1.2
+//import QtQuick 2.3
+//import QtQuick.Controls 1.2
 
 // http://doc.qt.io/qt-5/qml-qtquick-controls-radiobutton.html
 // exclusiveGroup is a string for now
@@ -14,11 +14,20 @@ Item {
   signal clicked();
 
   property var exclusiveGroup
+  property var exclusiveGroupName: exclusiveGroup ? exclusiveGroup.name : null
   
-  height: txt.implicitHeight+3
-  width: 30 + txt.implicitWidth
+  height: Math.max( txt.implicitHeight+3, 20 )
+  width: 25 + txt.implicitWidth
 
   /// internal
+  property var exclusiveGroupConnected
+  onExclusiveGroupChanged: {
+    if (exclusiveGroupConnected) exclusiveGroupConnected.unbindCheckable( radioButton);
+    if (exclusiveGroup)  exclusiveGroup.bindCheckable( radioButton );
+    exclusiveGroupConnected = exclusiveGroup;
+  }
+
+  Component.onDestruction: exclusiveGroup = null;
 
   id: radioButton
   
@@ -46,13 +55,13 @@ Item {
         radioButton.parent.exclusiveGroupName = "excl_group_" + (window.radioButtonExclusiveGroupCounter++);
       }
       
-      exclusiveGroup = radioButton.parent.exclusiveGroupName;
+      exclusiveGroupName = radioButton.parent.exclusiveGroupName;
     }
     
     radioButton.dom.style.pointerEvents = "auto";
     
     inp.dom.type = "radio";
-    inp.dom.name = exclusiveGroup;
+    inp.dom.name = exclusiveGroupName;
     
     inp.dom.addEventListener('click', function() {
       radioButton.checked = inp.dom.checked;

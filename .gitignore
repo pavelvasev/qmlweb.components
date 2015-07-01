@@ -79,3 +79,4 @@ $RECYCLE.BIN/
 *.lnk
 qmlweb_have.md.html
 readme.md.html
+QtQuick/Controls/jquery-ui/

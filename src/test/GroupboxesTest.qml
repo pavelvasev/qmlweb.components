@@ -1,5 +1,5 @@
-import QtQuick 2.1
-import QtQuick.Controls 1.2
+//import QtQuick 2.1
+//import QtQuick.Controls 1.2
 
 Column {
     width: 500
@@ -63,7 +63,7 @@ Column {
                 Button {
                     text: "Grow rect"
                     width: 100
-                    onClicked: { r1.height = 100; r1.width = 450; }
+                    onClicked: { r1.height = 100; r1.width = 650; }
                 }
                 Text {
                     text: "after grow, the height of groupbox should change"

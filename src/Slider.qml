@@ -1,5 +1,5 @@
-import QtQuick 2.3
-import QtQuick.Controls 1.2
+//import QtQuick 2.3
+//import QtQuick.Controls 1.2
 
 // http://doc.qt.io/qt-5/qml-qtquick-controls-slider.html
 Item {

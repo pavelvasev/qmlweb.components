@@ -1,5 +1,5 @@
-import QtQuick 2.3
-import QtQuick.Controls 1.2
+//import QtQuick 2.3
+//import QtQuick.Controls 1.2
 
 // http://doc.qt.io/qt-5/qml-qtquick-controls-combobox.html
 
@@ -21,6 +21,7 @@ Item {
         for (var i=0; i<content.children.length; i++)
         {
             var item = content.children[i];
+            if (!item.visible) continue;
             w = Math.max( w, item.x + item.width );
             h = Math.max( h, item.y + Math.max( item.implicitHeight,item.height) );
         }
@@ -48,7 +49,7 @@ Item {
 
     Item {
         id: fieldsetItem
-        width: parent.width - 19 - radius*2
+        width: parent.width - 19 - radius*2 
         height: parent.height - 16 - 3*radius/4
 
         property var htmlTagName: "fieldset"
@@ -68,7 +69,7 @@ Item {
     Item {
         x: (groupbox.width - fieldsetItem.width)/2 -5
         y: 8 + (groupbox.height - fieldsetItem.height)/2
-        width: fieldsetItem.width
+        width: fieldsetItem.width 
         height: fieldsetItem.height
 
         id: content

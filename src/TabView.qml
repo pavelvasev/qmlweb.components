@@ -2,16 +2,31 @@
 // http://doc.qt.io/qt-5/qml-qtquick-controls-tabview.html
 // uses RadioButton for tabs view
 
+/* TODO
+
+*/
+
 Item {
   id: tabview
   //property var contentItem: tabview
 
-  property var currentIndex
+  property var currentIndex: undefined
   property var count: contentItem.children.length
   
   property alias contentItem: content
   default property alias newChildren: content.data
 
+  function filterVisuals(arr) {
+    var res = [];
+    for (var i=0; i<arr.length; i++) {
+      if (arr[i] instanceof QMLRepeater) continue;
+      res.push( arr[i] );
+    }
+    return res;
+  }
+
+  property var tabsArr: filterVisuals( content.children )
+  
   Item {
 
   anchors.fill: parent
@@ -21,13 +36,17 @@ Item {
     spacing: 2
     Repeater {
       parent: tabview 
-      model: content.children.length
+      model: tabsArr.length
       delegate: RadioButton {
         // text: modelData.title
-        text: content.children[ item.index ].title || content.children[ item.index ].text || ("Tab "+item.index)
-        id: item
+        text: {
+          var qq= tabsArr[ ritem.index ]
+          //debugger;
+          return tabsArr[ ritem.index ].title || tabsArr[ ritem.index ].text || ("Tab "+ritem.index)
+        }
+        id: ritem
         // Component.onCompleted: console.log("Added an element (index: " + item.index + ")");
-        onClicked: tabview.currentIndex = item.index
+        onClicked: tabview.currentIndex = ritem.index
       }
     }
 
@@ -60,16 +79,21 @@ Item {
   */
   
   onCurrentIndexChanged: {
+
     for (var i=0; i<content.children.length; i++) {
       content.children[i].visible = false;
       // buttons.children[i].text = content.children[i].title || content.children[i].text || ("Tab "+i);
     }
+
     if (content.children.length > 0) {
       content.children[currentIndex].visible = true;
       buttons.children[currentIndex].checked = true; //// text = "<strong>" + buttons.children[currentIndex].text + "</strong";
     }
+
   }
 
-  Component.onCompleted: tabview.currentIndex = 0;
+  Component.onCompleted: {
+    if (typeof(tabview.currentIndex)==="undefined") tabview.currentIndex = 0;
+  }
   
 }

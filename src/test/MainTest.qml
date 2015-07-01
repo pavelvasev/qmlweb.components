@@ -1,5 +1,4 @@
-import QtQuick 2.1
-import QtQuick.Controls 1.2
+//import QtQuick.Controls 1.2
 
 Item {
     width: 500
@@ -13,23 +12,31 @@ Item {
 
         GroupBox { 
           title: "RadioButton test"
+          id: radiogroup
 
           Row {
+            ExclusiveGroup { id: tabPositionGroup }
             RadioButton {
               text: "First choice"
+              exclusiveGroup: tabPositionGroup
+              onCheckedChanged: if (checked) radiogroup.title = "you select "+text
             }
             RadioButton {
               text: "The long Second choice"
+              exclusiveGroup: tabPositionGroup
+              onCheckedChanged: if (checked) radiogroup.title = "you select "+text              
             }
             RadioButton {
               text: "Third choice"
+              exclusiveGroup: tabPositionGroup
+              onCheckedChanged: if (checked) radiogroup.title = "you select "+text              
             }            
           }
         }
 
         GroupBox {
             title: "GroupBox test"
-            width: parent.width
+            width: parent.width*0.8
             id: gbox
 
             Column {
