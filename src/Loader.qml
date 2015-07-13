@@ -1,6 +1,10 @@
 // http://doc.qt.io/qt-5/qml-qtquick-loader.html
 
-// TODO think on sizing behaviour. For now, size of item is set to loader sizes once, on load. Maybe it is good to create binding from loader sizes.
+/* TODO 
+   - think on sizing behaviour. For now, size of item is set to loader sizes once, on load. Maybe it is good to create binding from loader sizes.
+   - load from sourceComponent. BTW need to implement Component in qmlweb
+   - "active" prop is changing sourceComponent. Fix this.
+*/    
 
 Item {
   id: loader
@@ -22,8 +26,20 @@ Item {
       if (active) {
         // __executionContext
         var context = this.$properties["source"].componentScope;
-        sourceComponent = Qt.createComponent( source,context )
+
+        // little HACK. lookup in loaded qmldirs
+        var qdirInfo = engine.qmldirs[ source ]; 
+        if (qdirInfo) 
+          sourceComponent = Qt.createComponent( "@" + qdirInfo.url, context )
+        else
+          sourceComponent = Qt.createComponent( source,context )
+
+        if (!sourceComponent) {
+          console.error("Loader.qml: failed to load component from source=",source );
+        }
       }
+      else
+        sourceComponent = null;
     }
     else
       sourceComponent = null;
