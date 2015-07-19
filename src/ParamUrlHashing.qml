@@ -1,18 +1,21 @@
+// Kees some object property value in browser url hash
 Item {
   id: obj
   
   property var target: parent
   property var property: "value"
   property var propertyWrite: property
-  property var name
+  property var name                       // url hash item name
 
-  property var timeout: 500
+  property var timeout: 250               // milliseconds
 
   property var enabled: true
 
+  property var paramName: name
+
  /* 
   onValueChanged: {
-    //console.log(name,value);
+    //console.log(paramName,value);
     //params_update_hash();
   }
  */
@@ -22,7 +25,7 @@ Item {
   function params_update_hash()
   {
      
-     if (!name || name.length == 0) return;
+     if (!paramName || paramName.length == 0) return;
      if (engine.operationState === QMLOperationState.Init) return;
      //debugger;
      // нее if (timeout_id) return;
@@ -36,13 +39,13 @@ Item {
 
      if (obj.enabled) {
  	   var value = target[property];     
-       oo.params[name] = value;
+       oo.params[paramName] = value;
      }
      else
-      delete oo.params[name]
+      delete oo.params[paramName]
 
      var strpos = JSON.stringify( oo ); 
-     //console.log(">>>> setting url hash from param",name,value);
+     //console.log(">>>> setting url hash from param",paramName,value);
      location.hash = strpos;
      timeout_id = null;
 
@@ -51,19 +54,38 @@ Item {
 
   function params_parse_hash()
   {
-    if (!name || name.length == 0) return;
+//    console.log( "params_parse_hash name=",paramName);
+    if (!paramName || paramName.length == 0) return;
     if (location.hash.length < 10) return {};
     var oo = JSON.parse( location.hash.substr(1) );
     if (oo.params == null) return {};
-    if (oo.params.hasOwnProperty(name)) {
-      //console.log(">>>setting param from url-hash",name,oo.params[name]);
-      target[propertyWrite] = oo.params[name]; 
+    if (oo.params.hasOwnProperty(paramName)) {
+//      console.log(">>>setting param from url-hash",paramName,oo.params[paramName]);
+      target[propertyWrite] = oo.params[paramName]; 
     }
   }
   
+
   Component.onCompleted: {
     params_parse_hash()
     target[property+"Changed"].connect( obj,params_update_hash );
+    inited = true;
   }
-
+  property bool inited: false  
+  
+  onNameChanged: {
+//    console.log("^^^^^^^^^^ nrew name=",paramName);
+    // это на тот случай, когда имя параметра внезапно меняется, после изменения какого-то scopeName,
+    // например при динамической загрузке приложения как в distort/appender
+    if (inited)
+      params_parse_hash();
+  }
+  
+  onEnabledChanged: {
+    if (inited) {
+      debugger;
+      params_update_hash();
+    }
+  }
+  
 }

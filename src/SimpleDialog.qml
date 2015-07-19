@@ -41,6 +41,7 @@ Rectangle {
     y: 2
     text: ru ? "Закрыть" : "Close"
     css.cursor: "pointer"
+    z: 5
     //css.pointerEvents: "auto"
     
     MouseArea {
