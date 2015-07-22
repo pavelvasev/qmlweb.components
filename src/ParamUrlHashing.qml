@@ -34,7 +34,9 @@ Item {
      timeout_id = window.setTimeout( function() {
 
      var oo = {};
-     if (location.hash.length >= 10) oo = JSON.parse( location.hash.substr(1) );
+     if (location.hash.length >= 10) 
+        oo = read_hash_obj();
+
      if (!oo.params) oo.params = {};
 
      if (obj.enabled) {
@@ -52,12 +54,29 @@ Item {
      }, timeout );
   }  
 
+  function read_hash_obj() {
+      var oo = {};
+       try {
+         oo = JSON.parse( location.hash.substr(1) );
+       } catch(err) {
+         // sometimes url may be converted. decode it.
+         try {
+           oo = JSON.parse( decodeURIComponent( location.hash.substr(1) ) );
+         }
+         catch (err2) {
+           // do nothing
+         }
+       }
+     return oo;
+  }
+  
   function params_parse_hash()
   {
 //    console.log( "params_parse_hash name=",paramName);
     if (!paramName || paramName.length == 0) return;
     if (location.hash.length < 10) return {};
-    var oo = JSON.parse( location.hash.substr(1) );
+    var oo = read_hash_obj();
+    // var oo = JSON.parse( location.hash.substr(1) );
     if (oo.params == null) return {};
     if (oo.params.hasOwnProperty(paramName)) {
 //      console.log(">>>setting param from url-hash",paramName,oo.params[paramName]);
@@ -83,7 +102,6 @@ Item {
   
   onEnabledChanged: {
     if (inited) {
-      debugger;
       params_update_hash();
     }
   }
