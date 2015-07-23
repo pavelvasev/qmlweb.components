@@ -2,6 +2,8 @@ Embed 1.0 src/Embed.qml
 FileSelect 1.0 src/FileSelect.qml	
 Slider 1.0 src/Slider.qml
 ComboBox 1.0 src/ComboBox.qml
+GroupBox 1.0 src/GroupBox.qml
+GroupBoxF 1.0 src/GroupBoxF.qml
 SimpleDialog 1.0 src/SimpleDialog.qml 
 ExclusiveGroup 1.0 src/ExclusiveGroup.qml 
 Tab 1.0 src/Tab.qml 
