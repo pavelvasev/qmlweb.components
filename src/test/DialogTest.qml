@@ -2,7 +2,7 @@ import qmlweb.components
 
 Item {
           width: 500
-          height: 100
+          height: 400
 
           SimpleDialog {
             id: dlg
