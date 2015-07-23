@@ -1,4 +1,4 @@
-http://doc.qt.io/qt-5/qml-qtqml-binding.html
+// http://doc.qt.io/qt-5/qml-qtqml-binding.html
 
 Item {
   property string property
