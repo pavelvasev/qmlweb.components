@@ -2,6 +2,10 @@
 
 Subset of [QtQuick.Controls](http://doc.qt.io/qt-5/qtquickcontrols-index.html) and other useful things.
 
+## Online demo
+
+http://pavelvasev.github.io/qmlweb.run/?s=https%3A%2F%2Fgithub.com%2Fpavelvasev%2Fqmlweb.components%2Fblob%2Fmaster%2Fsrc%2Ftest%2FIndex.qml
+
 ## Demo and testing
 
 I. Download qmlweb from special fork [https://github.com/pavelvasev/qmlweb](https://github.com/pavelvasev/qmlweb)
