@@ -1,3 +1,4 @@
+import qmlweb.components
 
 Row {
   spacing: 10

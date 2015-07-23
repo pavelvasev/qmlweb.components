@@ -1,4 +1,5 @@
 //import QtQuick.Controls 1.2
+import qmlweb.components
 
 Item {
     width: 500

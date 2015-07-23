@@ -44,7 +44,7 @@
 <script>
     var q = document.getElementById("qmlSpace");
     var qmlEngine = new QMLEngine(q);
-    // qmlEngine.addModulePath( "qmlweb.components","https://github.com/pavelvasev/qmlweb.components" );
+    qmlEngine.addModulePath( "qmlweb.components","../.." );
     //if (qmlEngine.addImportPath) 
     //  qmlEngine.addImportPath(""); // for now we have to point to import dir directly 
     qmlEngine.loadFile( "Index.qml" );

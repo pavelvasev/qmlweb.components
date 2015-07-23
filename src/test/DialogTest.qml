@@ -1,3 +1,5 @@
+import qmlweb.components
+
 Item {
           width: 500
           height: 100

@@ -1,3 +1,5 @@
+import qmlweb.components
+
 Column {
     id: col
     property var r15: 15
