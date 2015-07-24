@@ -16,6 +16,10 @@ Item {
   property alias contentItem: content
   default property alias newChildren: content.data
 
+  function getTab( index ) {
+    return tabsArr[index];
+  }
+
   function filterVisuals(arr) {
     var res = [];
     for (var i=0; i<arr.length; i++) {
