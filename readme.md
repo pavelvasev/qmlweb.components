@@ -15,7 +15,7 @@ and put to sibling directory, e.g:
 
 You need those special fork because it has addImportPath method and other enhancements.
 
-II. Open [src/test/scene.html](src/test/scene.html)
+II. Open [src/test/test_run.html](src/test/test_run.html)
 
 ## Adding new controls
 
