@@ -153,6 +153,13 @@ Item {
             } // row for slider
     } // groupbox
 
+    ProgressBar {
+      value: 0.7
+      maximumValue: 2
+    }
+    ProgressBar {
+      intermediate: true
+    }    
 
 }
 }
