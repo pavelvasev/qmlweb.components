@@ -20,8 +20,18 @@ II. Open [src/test/test_run.html](src/test/test_run.html)
 ## Adding new controls
 
 1. Go to directory `src` and add some control. 
-2. Create a test case of that control in src/test/Index.qml.
+2. Put reference to it in qmldir file.
+3. Create a test case of that control in src/test/Index.qml.
 
 When choosing what to create at step 1, please note that QmlWeb [already has some](qmlweb_have.md) built-in implementations of some controls
 
+## TODO
 
+* RowLayout,ColumnLayout,GridLayout (with Layout attached properties)
+* ScrollView (seems to be simple as css.overflow), SplitView
+* Dialogs (at least Dialog class)
+* ColorPicker (brand new control, maybe using ColorDialog).
+ 
+Next todo things probably should be done exclusively in QmlWeb:
+* Component
+* Connections
