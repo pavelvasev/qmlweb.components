@@ -18,7 +18,7 @@ Rectangle {
         source: sources[index]
         Text {
           anchors.bottom: parent.bottom
-          text: "open <a target='_blank' href='"+parent.source+"'>"+parent.source+"</a>"
+          text: "open <a target='_blank' href='"+Qt.resolvedUrl(parent.source)+"'>"+parent.source+"</a>"
         }
       }
     }
