@@ -16,6 +16,10 @@ Rectangle {
       Tab {
         title: source
         source: sources[index]
+        Text {
+          anchors.bottom: parent.bottom
+          text: "open <a target='_blank' href='"+parent.source+"'>"+parent.source+"</a>"
+        }
       }
     }
 

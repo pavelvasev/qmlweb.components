@@ -153,9 +153,13 @@ Item {
             } // row for slider
     } // groupbox
 
+    Text {
+      text: "progress bars, one with value and second intermediate:"
+    }
+
     ProgressBar {
-      value: 0.7
-      maximumValue: 2
+      value: sla.value
+      maximumValue: 1
     }
     ProgressBar {
       intermediate: true

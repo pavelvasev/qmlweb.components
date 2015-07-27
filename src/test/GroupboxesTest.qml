@@ -75,24 +75,24 @@ Column {
     }
 
     GroupBoxF {
-      title: "Direct fieldset. We need to implement padding."
-      width: 400
-      height: 150
+        title: "Direct fieldset. We need to implement padding."
+        width: 400
+        height: 150
 
-      Column{
-        x: 20
-        y: 20
-      Rectangle {
+        Column{
+            x: 20
+            y: 20
+            Rectangle {
                 width: 50
                 height: 50
                 color: "blue"
-      }
-      Rectangle {
+            }
+            Rectangle {
                 width: 350
                 height: 50
                 color: "green"
-      }      
-      }
+            }
+        }
     }
 
 
