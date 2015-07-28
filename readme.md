@@ -27,6 +27,7 @@ When choosing what to create at step 1, please note that QmlWeb [already has som
 
 ## TODO
 
+* ParamCookie - save/restore some property to cookie
 * RowLayout,ColumnLayout,GridLayout (with Layout attached properties)
 * ScrollView (seems to be simple as css.overflow), SplitView
 * Dialogs (at least Dialog class)
