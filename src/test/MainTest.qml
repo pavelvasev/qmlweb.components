@@ -154,7 +154,7 @@ Item {
     } // groupbox
 
     Text {
-      text: "progress bars, one with value and second intermediate:"
+      text: "progress bars, one with value and second indeterminate:"
     }
 
     ProgressBar {
@@ -162,8 +162,8 @@ Item {
       maximumValue: 1
     }
     ProgressBar {
-      intermediate: true
+      indeterminate: true
     }    
-
+    
 }
 }

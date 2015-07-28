@@ -4,8 +4,8 @@
 //http://doc.qt.io/qt-5/qml-qtquick-controls-progressbar.html
 //https://developer.mozilla.org/ru/docs/Web/HTML/Element/progress
 Item {
-  width: 80
-  height: 15
+  width: 120 // 160x16 is a default size in chrome
+  height: 16
 
   id: progress
 
@@ -17,19 +17,15 @@ Item {
   // internal
   property var htmlTagName: "progress"
   
-  onValueChanged: {
-    if (!indeterminate)
-      progress.dom.value = value;
-    else
-      progress.dom.value = undefined;
-  }     
+  onValueChanged: updateDom();
+  onIndeterminateChanged: updateDom();
   
-  onIndeterminateChanged: {
-    if (!indeterminate)
-      progress.dom.value = value;
+  function updateDom() {
+    if (indeterminate)
+      progress.dom.removeAttribute("value");
     else
-      progress.dom.value = undefined;
-  }     
+      progress.dom.value = value;
+  }
       
   
   onMaximumValueChanged: {
