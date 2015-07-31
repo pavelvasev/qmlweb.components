@@ -20,9 +20,12 @@ Rectangle {
 
   anchors.horizontalCenter: parent.horizontalCenter
   anchors.verticalCenter: parent.verticalCenter
-
-  function open() { visible=true; }
-  function close() { visible=false; }
+  
+  signal afterOpen();
+  signal afterClose();  
+  
+  function open() { visible=true; afterOpen(); }
+  function close() { visible=false; afterClose(); }
 
   Text {
     x:5

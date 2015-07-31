@@ -4,7 +4,7 @@ Rectangle {
 
   color: "lightgrey"
   
-  property var sources: ["MainTest.qml","GroupboxesTest.qml","DialogTest.qml","LoaderTest.qml","TabviewsTest.qml","BindingTest.qml","test_qmlweb_1.qml","test_qmlweb_2.qml"]
+  property var sources: ["MainTest.qml","Combo.qml","GroupboxesTest.qml","DialogTest.qml","LoaderTest.qml","TabviewsTest.qml","BindingTest.qml","test_qmlweb_1.qml","test_qmlweb_2.qml"]
   
   TabView {
     id: tabs
