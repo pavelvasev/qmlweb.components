@@ -21,14 +21,10 @@ Item {
 
   signal loaded();
 
-  onSourceChanged: {
-    if (source) {
-      if (active) {
-        //if (loader.timeoutId)
-      
+  function respondToSourceChange() {
         //console.log("loader creates component for source=",source);
         // __executionContext
-        var context = this.$properties["source"].componentScope;
+        var context = loader.$properties["source"].componentScope;
         
         // little HACK. lookup in loaded qmldirs
         var qdirInfo = engine.qmldirs[ source ]; 
@@ -41,6 +37,30 @@ Item {
         if (!sourceComponent) {
           console.error("Loader.qml: failed to load component from source=",source );
         }
+  }
+  
+  // with timeoutMode = true, Loader performs loading after small timeout
+  // with timeoutMode = false, Loader loads (e.g. creates component) immediately
+  property bool timeoutMode: true
+  
+  onSourceChanged: {
+    if (loader.timeoutId && timeoutMode) { 
+      clearTimeout(loader.timeoutId); 
+      loader.timeoutId=null; 
+      //console.log("%%%%%%%%%%%%%%%%%%%%%%%% timeout cleared");
+    }
+          
+    if (source) {
+      if (active) {
+      
+        if (!timeoutMode) 
+          respondToSourceChange();
+        else
+          loader.timeoutId=setTimeout( function() {
+            respondToSourceChange();
+            loader.timeoutId=null;
+          }, 1 ); //setTimeout
+
       }
       else
         sourceComponent = null;
