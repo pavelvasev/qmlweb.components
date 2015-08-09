@@ -24,11 +24,15 @@ Item {
   onSourceChanged: {
     if (source) {
       if (active) {
+        //if (loader.timeoutId)
+      
+        //console.log("loader creates component for source=",source);
         // __executionContext
         var context = this.$properties["source"].componentScope;
         
         // little HACK. lookup in loaded qmldirs
         var qdirInfo = engine.qmldirs[ source ]; 
+        
         if (qdirInfo) 
           sourceComponent = Qt.createComponent( "@" + qdirInfo.url, context );
         else
@@ -57,6 +61,8 @@ Item {
   property var item
 
   onSourceComponentChanged: {
+    //console.log( "@@@LOADER id=",this._uniqueId,"SourceComponentChanged, sourceComponent=",sourceComponent);
+    //console.trace();
     
     if (item) {
         //console.log("deleting item...");
@@ -67,10 +73,12 @@ Item {
     }
 
     if (!sourceComponent || !active) {
+      //console.log("@@@LOADER not active or no source component, exiing");
       return;
     }
-    
+    //console.log("@@@LOADER create object");
     var it = sourceComponent.createObject(loader);
+    //console.log("@@@LOADER created object");
 
     if (!it) {
       console.error("failed to create object for component source=",source );
@@ -91,7 +99,9 @@ Item {
     // applyProperties(meta.object, it, it, meta.context);
     // видимо сюда пойдут properties
 
-           // console.log("assigning parent to loaded item",loader);
+    var recursionCheckItem = loader.item;
+
+           //console.log("assigning parent to loaded item. item=",it);
             it.parent = loader;
             loader.childrenChanged();
             
@@ -99,12 +109,26 @@ Item {
             if (engine.operationState !== QMLOperationState.Init && engine.operationState !== QMLOperationState.Idle) {
                 // We don't call those on first creation, as they will be called
                 // by the regular creation-procedures at the right time.
+                //console.log("@@@LOADER inits props");
                 engine.$initializePropertyBindings();
                 engine.callCompletedSignals();
+                //console.log("@@@LOADER inited props and compl signal");
                 //callOnCompleted(it);
             }
+            else {
+            //console.log("@@@LOADER did not call init prop bindings or completes, because engine.operationState=",engine.operationState);
+            }
+
+    if (recursionCheckItem !== loader.item) {
+      // ahha.. recursion...
+      
+      it.$delete();
+      it = undefined;
+      //console.log("loader exited due to recursion");
+      return;
+    }
   
-    //console.log("setting item to loader",loader.source, "it=",it );
+    //console.log("@@@LOADER setting item to loader loader.source=",loader.source, "it=",it );
     //debugger;
     loader.item = it;
    
@@ -113,7 +137,7 @@ Item {
     //  If an explicit size is not specified for the Loader, the Loader is automatically resized to the size of the loaded item once the component is loaded.
     //  If the size of the Loader is specified explicitly by setting the width, height or by anchoring, the loaded item will be resized to the size of the Loader.    
     
-    //console.log("loader loader.$isUsingImplicitWidth=",loader.$isUsingImplicitWidth, "loader.$isUsingImplicitHeight=",loader.$isUsingImplicitHeight,"width=",width,source );
+    //console.log("@@@LOADER loader.$isUsingImplicitWidth=",loader.$isUsingImplicitWidth, "loader.$isUsingImplicitHeight=",loader.$isUsingImplicitHeight,"width=",width,source );
     if (!loader.$isUsingImplicitWidth)
     {
       //console.log("setting loader.item.width = loader.width",loader.width);    
@@ -125,7 +149,7 @@ Item {
       loader.item.height = loader.height;
     }    
 
-    loaded();      
+    loaded();
   }
 
   /* 
