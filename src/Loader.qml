@@ -26,14 +26,14 @@ Item {
       if (active) {
         // __executionContext
         var context = this.$properties["source"].componentScope;
-
+        
         // little HACK. lookup in loaded qmldirs
         var qdirInfo = engine.qmldirs[ source ]; 
         if (qdirInfo) 
-          sourceComponent = Qt.createComponent( "@" + qdirInfo.url, context )
+          sourceComponent = Qt.createComponent( "@" + qdirInfo.url, context );
         else
-          sourceComponent = Qt.createComponent( source,context )
-
+          sourceComponent = Qt.createComponent( source.indexOf(".") > 0 ? source : source + ".qml",context );  // e.g. if source contains 'dot', load as is; if not - add .qml to it.
+          
         if (!sourceComponent) {
           console.error("Loader.qml: failed to load component from source=",source );
         }
@@ -71,6 +71,7 @@ Item {
     }
     
     var it = sourceComponent.createObject(loader);
+
     if (!it) {
       console.error("failed to create object for component source=",source );
       return;
@@ -99,7 +100,8 @@ Item {
                 // We don't call those on first creation, as they will be called
                 // by the regular creation-procedures at the right time.
                 engine.$initializePropertyBindings();
-                callOnCompleted(it);
+                engine.callCompletedSignals();
+                //callOnCompleted(it);
             }
   
     //console.log("setting item to loader",loader.source, "it=",it );
@@ -125,13 +127,15 @@ Item {
 
     loaded();      
   }
-  
+
+  /* 
     function callOnCompleted(child) {
         child.Component.completed();
         var arr = child.children.slice(0); // we need to clone array. because it may change during Component.OnCompleted evaluation, if some control will decide to change it's parent
         for (var i = 0; i < arr.length; i++)
             callOnCompleted(arr[i]);
     }
+    */
   
 
 }
