@@ -1,6 +1,7 @@
 Item {
-  anchors.fill:parent
-
+  //anchors.fill:parent
+  width: 800
+  height: 600
   TabView {
     anchors.fill:parent
     anchors.bottomMargin: 25
