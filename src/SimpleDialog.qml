@@ -22,10 +22,13 @@ Rectangle {
   anchors.verticalCenter: parent.verticalCenter
   
   signal afterOpen();
-  signal afterClose();  
+  signal afterClose();
   
-  function open() { visible=true; afterOpen(); }
-  function close() { visible=false; afterClose(); }
+//  function open() { visible=true; afterOpen(); }
+//  function close() { visible=false; afterClose(); }
+   
+  function open() { console.log("open called!"); visible=true; afterOpen(); }
+  function close() { console.log("close called!. making visible=false"); visible=false; console.log("calling afterClose"); afterClose(); console.log("close finished"); }
 
   Text {
     x:5

@@ -1,8 +1,6 @@
 Item {
   anchors.fill:parent
-  //z: -1
-  //width: 800
-  //height: 600
+
   TabView {
     anchors.fill:parent
     anchors.bottomMargin: 25
@@ -20,9 +18,9 @@ Item {
           autoPlay: true
           controls: true
 
-          fillMode: VideoOutput.PreserveAspectFit
+          //fillMode: VideoOutput.PreserveAspectFit
           //fillMode: VideoOutput.Stretch
-          //fillMode: VideoOutput.PreserveAspectCrop
+          fillMode: VideoOutput.PreserveAspectCrop
         }
     }
 
@@ -30,7 +28,7 @@ Item {
         title: "Camera"
         Camera {
           anchors.fill: parent
-          fillMode: VideoOutput.PreserveAspectFit
+          fillMode: VideoOutput.PreserveAspectCrop
           //fillMode: VideoOutput.Stretch
           active: tabview.currentIndex == 1
         }
@@ -40,7 +38,7 @@ Item {
         title: "Camera & Video"
         Camera {
           anchors.fill: parent
-          fillMode: VideoOutput.PreserveAspectFit
+          fillMode: VideoOutput.PreserveAspectCrop
           active: tabview.currentIndex == 2
           opacity: 0.75
           //z: -1
@@ -53,7 +51,7 @@ Item {
           source: "http://jwst.nasa.gov/sciencevids/EvolutionoftheUniverse/Re-Ionization-Galaxy_Evolution_wideshot-1080p_ipod_sm.mp4"
           autoPlay: true
           controls: true
-          fillMode: VideoOutput.PreserveAspectFit
+          fillMode: VideoOutput.PreserveAspectCrop
           onStopped: play();
           onPositionChanged: {
             //trick if (position > 34000) seek(0);
