@@ -15,7 +15,10 @@ and put to sibling directory, e.g:
 
 You need those special fork because it has addImportPath method and other enhancements.
 
-II. Open [src/test/test_run.html](src/test/test_run.html)
+II. Configure your browser to allow ajax requests to local files.
+* Chrome command line arg: `--allow-file-access-from-files`
+
+III. Open [src/test/test_run.html](src/test/test_run.html)
 
 ## Adding new controls
 
