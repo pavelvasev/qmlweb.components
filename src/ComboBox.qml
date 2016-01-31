@@ -20,7 +20,7 @@ Item {
   property int    size: 1 
 
   Component.onCompleted: {
-    init();
+    init(true);
   }
 
   onSizeChanged: {
@@ -42,25 +42,39 @@ Item {
   // sometimes we do not want to force the change currentIndex if it more than count
   property bool checkCurrentIndex: true
 
-  function init() {
+  function init(installHandler) {
     self.dom.style.pointerEvents = "auto";
-
+    //self.dom.innerHTML = ''; // TODO optimize
+    
     count = model.length;
     if (checkCurrentIndex)
       currentIndex = (currentIndex >= count) ? count-1 : currentIndex;
 
-    var str = '';
-    var k = count;
+
+    /*
     for(var i = 0; i < k; i++) {
       str += '<option value="'+i+'" '+(i==currentIndex?'selected':'')+'> '+model[i]+'</option>';
     }
-    //self.dom.innerHTML = '<select>'+str+'</select>';
     self.dom.innerHTML = str;
+    */
 
+    // http://www.tigir.com/javascript_select.htm
+    // var newOpt = new Option("text", "value", isDefaultSelected, isSelected);
+    
     var item = self.dom; //.firstChild;
-    item.style.width = width + 'px';
+    var k = count;
 
-    item.addEventListener('change', handleSelectItem, false);
+    item.options.length = k;
+    for(var i = 0; i < k; i++) {
+      var isselected = (i==currentIndex);
+      item.options[i] = new Option(model[i], i, isselected,isselected); // i==currentIndex second time?
+    }    
+    
+    
+    item.style.width = width + 'px';
+   
+    if (installHandler)
+        item.addEventListener('change', handleSelectItem, false);
   }
 
   onCurrentIndexChanged: {
@@ -75,7 +89,7 @@ Item {
   }
 
   onModelChanged: {
-    init();
+    init(false);
   }
 }
 
